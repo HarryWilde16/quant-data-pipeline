@@ -1,0 +1,70 @@
+# Project Configuration
+# Crypto Google Trends Hypothesis Testing
+
+## Research Hypothesis
+hypothesis: "Cryptocurrency prices and volumes spike 1-7 days after Google search trends increase"
+confidence_level: 0.95  # 95% significance threshold for statistical tests
+
+## Cryptocurrency Universe
+cryptocurrencies:
+  - symbol: BTC
+    ticker: BTC-USD
+    name: Bitcoin
+  - symbol: ETH
+    ticker: ETH-USD
+    name: Ethereum
+  - symbol: XRP
+    ticker: XRP-USD
+    name: Ripple
+  - symbol: SOL
+    ticker: SOL-USD
+    name: Solana
+  - symbol: ADA
+    ticker: ADA-USD
+    name: Cardano
+  - symbol: TAO
+    ticker: TAO-USD
+    name: Bittensor
+  - symbol: DOGE
+    ticker: DOGE-USD
+    name: Dogecoin
+  - symbol: LINK
+    ticker: LINK-USD
+    name: Chainlink
+  - symbol: HBAR
+    ticker: HBAR-USD
+    name: Hedera
+  - symbol: SUI
+    ticker: SUI-USD
+    name: Sui
+
+## Data Collection Parameters
+data_collection:
+  start_date: "2022-01-01"
+  end_date: "2024-12-31"
+  frequency: "daily"
+  
+## Feature Engineering
+features:
+  google_trends_spike_threshold: 0.90  # 90th percentile
+  lag_periods: [1, 3, 5, 7]  # Days to look ahead for returns
+  price_change_metrics:
+    - close_return
+    - volume_change
+    - high_low_range
+
+## Statistical Testing
+testing:
+  min_sample_size: 30  # Minimum observations for significance
+  test_type: "t-test"
+  significance_level: 0.05  # 5% alpha
+
+## Database
+database:
+  type: "sqlite"
+  path: "quant.db"
+  tables:
+    - crypto_prices  # OHLCV data
+    - google_trends  # Search volume
+    - features       # Calculated features
+    - results        # Analysis results
